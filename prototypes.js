@@ -1,6 +1,4 @@
-/* 
-
-*/
+// PSEUDO-CLASSICAL INHERITANCE
 
 // Object Constructor Funciton - since Capital Letter
 function Animal(obj) {
@@ -70,8 +68,77 @@ function Banana(bananaAttrs) {
 
 Banana.prototype.CheckIfMonkiesLikeIt = function() {
   if (this.doMonkiesLikeIt) {
-    return `Yea they love em !`;
+    return `Yea ${this.name} loves em !`;
   } else {
     return `Nope, not no more.`;
   }
 };
+// banana won't inherit the calculateCalories method
+// from the Fruit Parent UNTIL this following line ...
+Banana.prototype = Object.create(Fruit.prototype);
+
+const newBanana = new Banana({
+  doMonkiesLikeIt: true,
+  type: 'Tree',
+  name: 'Ana Banannaaaa',
+  isRipe: true,
+  calories: 0.9
+});
+
+// console.log(newBanana.CheckIfMonkiesLikeIt());
+console.log(newBanana.calculateCalories());
+
+/* *********************
+Kiwi and Banana are two instances of the Fruit Constructor Class
+they Call on the Fruit to inherit its attributes
+They must also explicitly clone the Fruit prototype in order to have it.
+*********************** */
+
+function Kiwi(kiwiAttr) {
+  Fruit.call(this, kiwiAttr); // allows inheritance of all attributes from the Fruit Constructor BUT NOT THE Fruit prototype
+  this.isFuzzy = kiwiAttr.isFuzzy;
+}
+
+Kiwi.prototype = Object.create(Fruit.prototype);
+
+const newKiwi = new Kiwi({
+  isFuzzy: true,
+  type: 'Treee',
+  name: 'Kiwi',
+  isRipe: true,
+  calories: 0.3
+});
+
+console.log(newKiwi.calculateCalories());
+console.log(newKiwi.shipped('Miami'));
+
+/* ******************* CLASS ************************* */
+
+class Person {
+  constructor(attr) {
+    this.gender = attr.gender;
+    this.age = attr.age;
+  }
+  speak() {
+    return `Hello, my name is ${this.name}`;
+  }
+}
+
+class Child extends Person {
+  constructor(childAttrs) {
+    // the super function takes child attrs and passes them back to person when it's created.
+    // Any time a Class is extended, super() must be called in order to pass new attributes to the parent.
+    super(childAttrs);
+    this.isChild = childAttrs.isChild;
+  }
+  checkIfChild() {
+    return `${this.name} is child? ${this.isChild}`;
+  }
+}
+
+class GrandChild extends Child {
+  constructor(gc) {
+    super(gc);
+    this.generation = gc.generation;
+  }
+}
