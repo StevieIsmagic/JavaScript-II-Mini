@@ -45,3 +45,33 @@ const pebbles = new Child({
   isChild: true
 });
 console.log(pebbles.checkIfChild());
+
+/* ******************************************** */
+
+function Fruit(attrs) {
+  this.type = attrs.type;
+  this.name = attrs.name;
+  this.isRipe = attrs.isRipe;
+  this.calories = attrs.calories;
+}
+
+Fruit.prototype.shipped = function(destination) {
+  console.log(`shipping ${this.name} to ${destination}`);
+};
+
+Fruit.prototype.calculateCalories = function() {
+  console.log(`Calories in ${this.name} are ${this.calories * 0.45}`);
+};
+
+function Banana(bananaAttrs) {
+  Fruit.call(this, bananaAttrs);
+  this.doMonkiesLikeIt = bananaAttrs.doMonkiesLikeIt;
+}
+
+Banana.prototype.CheckIfMonkiesLikeIt = function() {
+  if (this.doMonkiesLikeIt) {
+    return `Yea they love em !`;
+  } else {
+    return `Nope, not no more.`;
+  }
+};
