@@ -12,10 +12,10 @@ Animal.prototype.grow = function() {
   return `${this.name} grew larger!`;
 };
 
-const bear = new Animal({ name: 'Stevie' });
-console.log(bear.grow());
+const bear = new Animal({ name: 'Stevie Bear' });
+console.log('1. Animal.grow()', bear.grow());
 
-// class Animal {
+// class Animal
 //   constructor(object) {
 //     this.type = object.type;
 //     this.name = object.name;
@@ -67,15 +67,21 @@ console.log(bear.grow());
 
 function Cat(options) {
   // invoke Animal here with .call
+  Animal.call(this, options);
 }
+// inherit from Animal.prototype
+Cat.prototype = Object.create(Animal.prototype);
+const tabby = new Cat({ name: 'Tabitha' });
+
+console.log('2. Cat inherits from Animal:', tabby.grow());
 
 // connect the prototypes here
 
 // if everything is setup properly the code below will print 'Foofie grew larger!'
 // uncomment the code below to test your solution
 
-// const foofie = new Cat({
-//   name: 'foofie',
-// });
-//
-// foofie.grow();
+const foofie = new Cat({
+  name: 'foofie'
+});
+
+console.log(foofie.grow());
