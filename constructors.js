@@ -8,7 +8,56 @@ function Animal(options) {
   this.name = options.name;
 }
 
-// add 'grow' to Animal's prototype here
+Animal.prototype.grow = function() {
+  return `${this.name} grew larger!`;
+};
+
+const bear = new Animal({ name: 'Stevie' });
+console.log(bear.grow());
+
+// class Animal {
+//   constructor(object) {
+//     this.type = object.type;
+//     this.name = object.name;
+//     this.sound = object.sound;
+//   }
+//   speak() {
+//     return this.sound;
+//   }
+// }
+
+// old constructor function
+// function Animal(object) {
+//   this.type = object.type;
+//   this.name = object.name;
+//   this.sound = object.sound;
+//   this.speak = function() {
+//     return this.sound;
+//   };
+// }
+
+// const doggo = new Animal({ type: 'dog', name: 'stevie', sound: 'woof!' });
+// console.log(doggo.speak());
+
+// const liger = new Animal({
+//   type: 'Lyger',
+//   name: 'Leeroy',
+//   sound: 'ROWADF'
+// });
+// console.log(liger.speak());
+
+// function Animal(options) {
+//   this.name = options.name;
+// }
+
+// // add 'grow' to Animal's prototype here
+// Animal.prototype.grow = function() {
+//   return `${this.name} grew larger!`;
+// };
+
+// const monkey = new Animal('Stevie');
+// monkey.grow();
+// console.log(monkey);
 
 // problem #2
 // setup Cat to inherit from Animal
@@ -30,4 +79,3 @@ function Cat(options) {
 // });
 //
 // foofie.grow();
-
